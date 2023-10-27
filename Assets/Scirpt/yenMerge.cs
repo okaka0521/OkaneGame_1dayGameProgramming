@@ -7,9 +7,11 @@ public class yenMerge : MonoBehaviour
 	private int needMerge = 0;
 	private int objectID;
 	private GameSystem gameSystem;
+	private GameObject AudioSystem;
 	// Start is called before the first frame update
 	void Start()
 	{
+		AudioSystem = GameObject.FindWithTag("Audio");
 		gameSystem = GameObject.FindWithTag("GameSystem").gameObject.GetComponent<GameSystem>();
 		objectID = gameSystem.Identity++;
 		thisTag = this.gameObject.tag;
@@ -55,6 +57,7 @@ public class yenMerge : MonoBehaviour
 						Instantiate(prefab, otherPos, Quaternion.identity);
 					}
 				}
+				AudioSystem.GetComponent<AudioSystem>().PlaySE(1);
 				Destroy(other.gameObject);
 				//Debug.Log(this.gameObject.name + " " + ObjectID + " " + thisMerge);
 			}
@@ -108,6 +111,7 @@ public class yenMerge : MonoBehaviour
 						gameSystem.Score += 20000;
 						break;
 				}
+				AudioSystem.GetComponent<AudioSystem>().PlaySE(1);
 				Destroy(this.gameObject);
 			}
 		}

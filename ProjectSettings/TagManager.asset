@@ -16,6 +16,7 @@ TagManager:
   - GameSystem
   - NEXT
   - Panel
+  - Audio
   layers:
   - Default
   - TransparentFX

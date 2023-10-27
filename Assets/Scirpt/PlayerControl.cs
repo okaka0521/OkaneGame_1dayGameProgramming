@@ -14,10 +14,12 @@ public class PlayerControl : MonoBehaviour
 	private GameObject CurrentObject;
 	private const float interval = 0.25f;
 	private float time = 0f;
+	private GameObject AudioSystem;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		AudioSystem = GameObject.FindWithTag("Audio");
 		gameSystem = GameObject.FindWithTag("GameSystem").gameObject.GetComponent<GameSystem>();
 		NextObject = Resources.Load<GameObject>("Prefab/1yen");
 		SetNextOkane();
@@ -26,7 +28,7 @@ public class PlayerControl : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (!gameSystem.IsGameOver)
+		if (!gameSystem.IsGameOver && !gameSystem.IsPause)
 		{
 			TextUpdate();
 			PlayerMove();
@@ -57,6 +59,7 @@ public class PlayerControl : MonoBehaviour
 		if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return)) && time >= interval)
 		{
 			ThrowOkane();
+			AudioSystem.GetComponent<AudioSystem>().PlaySE(0);
 			time = 0f;
 		}
 	}
